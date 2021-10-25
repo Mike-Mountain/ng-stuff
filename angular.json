@@ -5,7 +5,7 @@
       "projectType": "application",
       "root": "apps/dashboard",
       "sourceRoot": "apps/dashboard/src",
-      "prefix": "ng-stuff",
+      "prefix": "dash",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -128,7 +128,7 @@
       "projectType": "library",
       "root": "libs/shared-ui",
       "sourceRoot": "libs/shared-ui/src",
-      "prefix": "ng-stuff",
+      "prefix": "shared",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
