@@ -149,6 +149,58 @@
         }
       },
       "tags": []
+    },
+    "unsplash-weather-api": {
+      "root": "apps/unsplash-weather-api",
+      "sourceRoot": "apps/unsplash-weather-api/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/unsplash-weather-api",
+            "main": "apps/unsplash-weather-api/src/main.ts",
+            "tsConfig": "apps/unsplash-weather-api/tsconfig.app.json",
+            "assets": ["apps/unsplash-weather-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/unsplash-weather-api/src/environments/environment.ts",
+                  "with": "apps/unsplash-weather-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "unsplash-weather-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/unsplash-weather-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/unsplash-weather-api"],
+          "options": {
+            "jestConfig": "apps/unsplash-weather-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
