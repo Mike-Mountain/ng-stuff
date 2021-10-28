@@ -2,7 +2,7 @@ import { HttpService, Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { map, mergeMap } from 'rxjs/operators';
-import { UnsplashImage, UnsplashWeatherImage, Weather } from '../../models/weather-image.model';
+import { UnsplashImage, UnsplashWeatherImage, Weather } from '@ng-stuff/data';
 
 @Injectable()
 export class WeatherImageService {

@@ -42,7 +42,7 @@ export class UnsplashWeatherImage {
   searchQuery: string;
 
   constructor(options: any, searchQuery: string) {
-    this.images = options.images.map(image => new UnsplashImage(image));
+    this.images = options.images.map((image: any) => new UnsplashImage(image));
     this.weather = new Weather(options.weather);
     this.searchQuery = searchQuery;
   }

@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ng-stuff/shared-ui": ["libs/shared-ui/src/index.ts"]
+      "@ng-stuff/data": ["libs/data/src/index.ts"],
+      "@ng-stuff/shared-ui": ["libs/shared-ui/src/index.ts"],
+      "@ng-stuff/config": ["config/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

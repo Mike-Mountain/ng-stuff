@@ -40,19 +40,39 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/dashboard/src/environments/environment.ts",
-                  "with": "apps/dashboard/src/environments/environment.prod.ts"
+                  "replace": "config/environment.ts",
+                  "with": "config/prod/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "dev": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "config/environment.ts",
+                  "with": "config/dev/environment.dev.ts"
+                }
+              ]
+            },
+            "local": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "config/environment.ts",
+                  "with": "config/local/environment.local.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -63,11 +83,14 @@
             "production": {
               "browserTarget": "dashboard:build:production"
             },
-            "development": {
-              "browserTarget": "dashboard:build:development"
+            "dev": {
+              "browserTarget": "dashboard:build:dev"
+            },
+            "local": {
+              "browserTarget": "dashboard:build:local"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "dev"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -95,34 +118,28 @@
       },
       "tags": []
     },
-    "dashboard-e2e": {
-      "root": "apps/dashboard-e2e",
-      "sourceRoot": "apps/dashboard-e2e/src",
-      "projectType": "application",
+    "data": {
+      "root": "libs/data",
+      "sourceRoot": "libs/data/src",
+      "projectType": "library",
       "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/dashboard-e2e/cypress.json",
-            "devServerTarget": "dashboard:serve:development",
-            "tsConfig": "apps/dashboard-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "dashboard:serve:production"
-            }
-          }
-        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["apps/dashboard-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["libs/data/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/data"],
+          "options": {
+            "jestConfig": "libs/data/jest.config.js",
+            "passWithNoTests": true
           }
         }
       },
-      "tags": [],
-      "implicitDependencies": ["dashboard"]
+      "tags": []
     },
     "shared-ui": {
       "projectType": "library",
@@ -189,19 +206,39 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/unsplash-weather/src/environments/environment.ts",
-                  "with": "apps/unsplash-weather/src/environments/environment.prod.ts"
+                  "replace": "config/environment.ts",
+                  "with": "config/prod/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "dev": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "config/environment.ts",
+                  "with": "config/dev/environment.dev.ts"
+                }
+              ]
+            },
+            "local": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "config/environment.ts",
+                  "with": "config/local/environment.local.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -212,11 +249,14 @@
             "production": {
               "browserTarget": "unsplash-weather:build:production"
             },
-            "development": {
-              "browserTarget": "unsplash-weather:build:development"
+            "dev": {
+              "browserTarget": "unsplash-weather:build:dev"
+            },
+            "local": {
+              "browserTarget": "unsplash-weather:build:local"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "local"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -265,8 +305,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/unsplash-weather-api/src/environments/environment.ts",
-                  "with": "apps/unsplash-weather-api/src/environments/environment.prod.ts"
+                  "replace": "config/environment.ts",
+                  "with": "config/prod/environment.prod.ts"
                 }
               ]
             }
@@ -295,34 +335,6 @@
         }
       },
       "tags": []
-    },
-    "unsplash-weather-e2e": {
-      "root": "apps/unsplash-weather-e2e",
-      "sourceRoot": "apps/unsplash-weather-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/unsplash-weather-e2e/cypress.json",
-            "devServerTarget": "unsplash-weather:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "unsplash-weather:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/unsplash-weather-e2e/**/*.{js,ts}"]
-          }
-        }
-      },
-      "tags": [],
-      "implicitDependencies": ["unsplash-weather"]
     }
   }
 }
