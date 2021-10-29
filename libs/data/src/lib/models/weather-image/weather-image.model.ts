@@ -2,6 +2,7 @@ export class Weather {
   description: string;
   main: string;
   humidity: number;
+  temp: number;
   visibility: number;
   windSpeed: number;
   cloudCoverage: number;
@@ -11,6 +12,7 @@ export class Weather {
     this.description = options.weather[0].description;
     this.main = options.weather[0].main;
     this.humidity = options.main.humidity;
+    this.temp = Math.floor(options.main.temp - 273.15); // Convert from K to C
     this.visibility = options.visibility;
     this.windSpeed = options.wind.speed;
     this.cloudCoverage = options.clouds.all;

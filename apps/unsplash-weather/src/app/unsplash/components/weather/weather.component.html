@@ -1,0 +1,8 @@
+<mat-card class='w-100 mb-2 mat-elevation-z5' [ngStyle]='{background: "url(" + image + ") no-repeat top/cover"}' *ngIf='weather'>
+  <mat-card-content class='weather-info'>
+    <h2 class='mb-2'>{{weather.name}}</h2>
+    <p class='mb-2'>{{currentDate | date : 'fullDate'}}</p>
+    <h1 class='temperature'>{{weather.temp}}°C</h1>
+    <h3>{{weather.description}}</h3>
+  </mat-card-content>
+</mat-card>

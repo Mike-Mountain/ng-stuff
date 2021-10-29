@@ -1,0 +1,22 @@
+<section>
+  <ng-container *ngIf=gallery>
+    <uns-weather
+      [weather]='gallery.weather'
+      [image]='(gallery.images | randomNumber).url'
+    ></uns-weather>
+    <div class='image-gallery'>
+      <ng-container *ngFor='let image of gallery.images'>
+        <mat-card
+          class='p-0 gallery-image'
+          [ngStyle]='{background: "url(" + image.url + ") no-repeat center/cover"}'
+          (click)='openDialog(dialog, image.url)'
+        ></mat-card>
+      </ng-container>
+    </div>
+    <mat-paginator class='mt-2'></mat-paginator>
+  </ng-container>
+</section>
+
+<ng-template #dialog>
+    <img [src]='selectedImage' alt=''>
+</ng-template>

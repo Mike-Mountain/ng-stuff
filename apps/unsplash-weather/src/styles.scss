@@ -1,1 +1,6 @@
 @import "libs/shared-ui/src/scss/shared-core";
+.mat-dialog-container {
+  padding: 0 !important;
+  border-radius: 10px !important;
+  display: flex !important;
+}
