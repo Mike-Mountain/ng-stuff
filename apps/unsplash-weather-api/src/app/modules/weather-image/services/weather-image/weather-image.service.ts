@@ -7,6 +7,7 @@ import { UnsplashImage, UnsplashWeatherImage, Weather } from '@ng-stuff/data';
 @Injectable()
 export class WeatherImageService {
   unsplashSearchQuery: string;
+  totalImages: number;
 
   constructor(private http: HttpService) {}
 
@@ -15,22 +16,22 @@ export class WeatherImageService {
     return this.http.get(url).pipe(map((item) => item.data));
   }
 
-  getImageByWeather(weather: Weather): Observable<UnsplashImage> {
+  getImageByWeather(weather: Weather, page: number): Observable<UnsplashImage> {
     const tempWeather = new Weather(weather);
     this.unsplashSearchQuery = `${tempWeather.description} + nature`;
-    const url = `${environment.unsplashApi}/search/photos?query='${this.unsplashSearchQuery}'&per_page=21&orientation=landscape`;
+    const url = `${environment.unsplashApi}/search/photos?query='${this.unsplashSearchQuery}'&page=${page}&per_page=10&orientation=landscape&order_by=relevant`;
     const reqHeaders = {
       Authorization: `Client-ID ${environment.unsplashKey}`,
     };
     return this.http
       .get(url, { headers: reqHeaders })
-      .pipe(map((image) => image.data.results));
+      .pipe(tap(image => this.totalImages = image.data.total), map((image) => image.data.results));
   }
 
-  getUnsplashWeatherImage(city: string): Observable<UnsplashWeatherImage> {
+  getUnsplashWeatherImage(city: string, page = '1'): Observable<UnsplashWeatherImage> {
     return this.getCurrentWeatherForCity(city).pipe(
       mergeMap((weather) => {
-        return this.getImageByWeather(weather).pipe(
+        return this.getImageByWeather(weather, parseInt(page, 10)).pipe(
           map((images) => {
             return { images, weather };
           })
@@ -39,7 +40,8 @@ export class WeatherImageService {
       map((unsplashWeatherImage) => {
         return new UnsplashWeatherImage(
           unsplashWeatherImage,
-          this.unsplashSearchQuery
+          this.unsplashSearchQuery,
+          this.totalImages
         );
       })
     );

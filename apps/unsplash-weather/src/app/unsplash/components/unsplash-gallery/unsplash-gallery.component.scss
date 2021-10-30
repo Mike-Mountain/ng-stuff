@@ -1,12 +1,21 @@
+.gallery-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .image-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 1fr;
   grid-gap: .5rem;
-  max-height: 68%;
   overflow-y: auto;
 }
 
 .gallery-image {
   height: 8rem;
+  &:last-child {
+    grid-column: 1/-1;
+    height: 4rem;
+  }
 }

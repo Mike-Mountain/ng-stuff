@@ -42,10 +42,12 @@ export class UnsplashWeatherImage {
   images: UnsplashImage[];
   weather: Weather;
   searchQuery: string;
+  totalImages: number;
 
-  constructor(options: any, searchQuery: string) {
+  constructor(options: any, searchQuery: string, total: number) {
     this.images = options.images.map((image: any) => new UnsplashImage(image));
     this.weather = new Weather(options.weather);
     this.searchQuery = searchQuery;
+    this.totalImages = total;
   }
 }

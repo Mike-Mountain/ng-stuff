@@ -1,22 +1,30 @@
-<section>
-  <ng-container *ngIf=gallery>
-    <uns-weather
-      [weather]='gallery.weather'
-      [image]='(gallery.images | randomNumber).url'
-    ></uns-weather>
-    <div class='image-gallery'>
-      <ng-container *ngFor='let image of gallery.images'>
-        <mat-card
-          class='p-0 gallery-image'
-          [ngStyle]='{background: "url(" + image.url + ") no-repeat center/cover"}'
-          (click)='openDialog(dialog, image.url)'
-        ></mat-card>
-      </ng-container>
+<section class='gallery-page'>
+  <ng-container *ngIf="gallery && headerImage">
+    <div class='w-100 h-100'>
+      <uns-weather
+        [weather]='gallery.weather'
+        [image]='headerImage.url'
+      ></uns-weather>
+      <div class='image-gallery'>
+        <ng-container *ngFor='let image of gallery.images'>
+          <mat-card
+            class='p-0 gallery-image'
+            [ngStyle]='{background: "url(" + image.url + ") no-repeat center/cover"}'
+            (click)='openDialog(dialog, image.url)'
+          ></mat-card>
+        </ng-container>
+      </div>
     </div>
-    <mat-paginator class='mt-2'></mat-paginator>
+    <mat-paginator
+      class='w-100'
+      [hidePageSize]='true'
+      [pageSize]='9'
+      [length]='gallery.totalImages'
+      (page)='page($event)'
+    ></mat-paginator>
   </ng-container>
 </section>
 
 <ng-template #dialog>
-    <img [src]='selectedImage' alt=''>
+  <img [src]='selectedImage' alt=''>
 </ng-template>

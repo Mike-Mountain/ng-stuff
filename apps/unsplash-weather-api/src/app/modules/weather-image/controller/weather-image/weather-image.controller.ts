@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Req } from '@nestjs/common';
+import { Controller, Get, Param, Query, Req } from '@nestjs/common';
 import { WeatherImageService } from '../../services/weather-image/weather-image.service';
 
 @Controller('weather-image')
@@ -8,8 +8,8 @@ export class WeatherImageController {
   }
 
 
-  @Get(':city')
-  async getWeatherImage(@Req() request: Request, @Param() city: {city: string}) {
-    return this.weatherImageService.getUnsplashWeatherImage(city.city);
+  @Get()
+  async getWeatherImage(@Req() request: Request, @Query() params: {city: string, page: string}) {
+    return this.weatherImageService.getUnsplashWeatherImage(params.city, params.page);
   }
 }
